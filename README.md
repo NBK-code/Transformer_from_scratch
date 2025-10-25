@@ -80,8 +80,6 @@ Each block includes:
 - Layer normalization
 
 
-### Understanding the Attention Mechanism
-
 The **core of the Transformer** is the **attention mechanism**, which allows each token in a sequence to dynamically focus on other relevant tokens.
 
 
@@ -98,67 +96,11 @@ Here:
 The output is a matrix of shape **(n<sub>q</sub>, d<sub>v</sub>)** — one output vector per query.
 
 
-Although the formula uses all vectors at once, we can focus on **a single query vector** \(q<sub>i</sub>\).
-
-<p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\mathrm{Attention}(q_i,K,V)=\sum_{j=1}^{n_k}\alpha_{ij}v_j" alt="Single attention equation">
-</p>
-
-Each attention weight \(α<sub>ij</sub>\) is computed as:
-
-<p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\alpha_{ij}=\frac{\exp\left(\frac{q_i\cdot k_j}{\sqrt{d_k}}\right)}{\sum_{l=1}^{n_k}\exp\left(\frac{q_i\cdot k_l}{\sqrt{d_k}}\right)}" alt="Alpha weight equation">
-</p>
-
-
-### Step-by-Step Intuition
-
-#### 1️⃣ Compute Similarities
-We compute dot products between the query \(q<sub>i</sub>\) and all keys \(k<sub>j</sub>\):
-
-<p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?s_j=q_i\cdot k_j" alt="Dot product similarity">
-</p>
-
-Each \(s<sub>j</sub>\) measures how similar the query is to key \(k<sub>j</sub>\).
-
-
-
-#### 2️⃣ Scale and Normalize
-We scale by (1 / √dₖ) for numerical stability, then apply **softmax** across all keys:
-
-<p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\alpha_{ij}=\mathrm{softmax}_j\left(\frac{s_j}{\sqrt{d_k}}\right)" alt="Softmax scaling">
-</p>
-
-These weights form a probability distribution — they sum to 1 across all keys.
-
-
-#### 3️⃣ Weighted Sum of Values
-Each output vector z<sub>i</sub> is a weighted sum of the values z<sub>j</sub>:
-
-<p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?z_i=\sum_j\alpha_{ij}v_j" alt="Weighted sum of values">
-</p>
-
-This means each query’s new representation z<sub>i</sub> is a **blend of the value vectors**, with weights depending on similarity to the keys.
-
-
-### Summary
-
-| Symbol | Meaning |
-|---------|----------|
-| q<sub>i</sub> | What we’re **looking for** (the query) |
-| k<sub>j</sub> | What each token **represents** (the key) |
-| v<sub>j</sub> | What each token **offers as information** (the value) |
-| α<sub>ij</sub> | How much **attention** q<sub>i</sub> gives to v<sub>j</sub> |
-| z<sub>i</sub> | The **new, context-aware representation** of \(q_i\) |
-
----
-
 ## References
 
 1. [Vaswani et al., *Attention Is All You Need* (2017)](https://arxiv.org/abs/1706.03762)
 2. [Umar Jamil's GitHub Transformer repository](https://github.com/hkproj/pytorch-transformer/tree/main)
 3. [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
 4. [Hugging Face Datasets](https://huggingface.co/docs/datasets)
+
+
