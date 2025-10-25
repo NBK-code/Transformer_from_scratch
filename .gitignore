@@ -1,0 +1,34 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.env/
+.env.*
+
+# PyTorch checkpoints / model weights
+*.pt
+*.pth
+weights/
+opus_books_weights/
+saved_weights/
+models/
+
+# TensorBoard / logs
+runs/
+
+# Tokenizer caches (optional - include if you DO NOT want to commit tokenizers)
+# tokenizer_*.json
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDEs / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
